@@ -14,24 +14,16 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    signIn: (state, action: PayloadAction<{ email: string, password?: string }>) => {
-      // Em um aplicativo real, você faria uma chamada de API aqui
-      // para verificar as credenciais do usuário.
+    setAuthenticated: (state, action: PayloadAction<{ name?: string; email?: string }>) => {
       state.isAuthenticated = true;
-      state.user = { name: 'Usuário', email: action.payload.email };
+      state.user = action.payload.email ? { name: action.payload.name || 'Usuário', email: action.payload.email } : null;
     },
-    signUp: (state, action: PayloadAction<{ name: string, email: string, password?: string }>) => {
-      // Em um aplicativo real, você faria uma chamada de API aqui
-      // para registrar o usuário.
-      state.isAuthenticated = true;
-      state.user = { name: action.payload.name, email: action.payload.email };
-    },
-    signOut: (state) => {
+    clearAuth: (state) => {
       state.isAuthenticated = false;
       state.user = null;
     },
   },
 });
 
-export const { signIn, signUp, signOut } = authSlice.actions;
+export const { setAuthenticated, clearAuth } = authSlice.actions;
 export default authSlice.reducer;

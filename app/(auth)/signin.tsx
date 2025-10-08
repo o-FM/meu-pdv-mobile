@@ -1,19 +1,28 @@
 import { Link } from 'expo-router';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/ui/form-field';
-import { signIn } from '@/store/auth-slice';
+import { useLogin } from '@/hooks/useAuth';
+import { setAuthenticated } from '@/store/auth-slice';
 
 export default function SignIn() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignIn = () => {
-    dispatch(signIn({ email, password }));
+  const mutation = useLogin();
+
+  const handleSignIn = async () => {
+    try {
+      const res = await mutation.mutateAsync({ email, password });
+      // optionally get profile from res; for now mark as authenticated
+      dispatch(setAuthenticated({ email }));
+    } catch (e: any) {
+      // handled by UI below
+    }
   };
 
   return (
@@ -37,7 +46,13 @@ export default function SignIn() {
         />
       </View>
 
-      <Button label="Sign In" onPress={handleSignIn} />
+      {mutation.status === 'pending' ? (
+        <ActivityIndicator />
+      ) : (
+        <Button label="Sign In" onPress={handleSignIn} />
+      )}
+
+      {mutation.isError && <Text style={{ color: 'red', marginTop: 8 }}>{(mutation.error as any)?.message || 'Erro ao autenticar'}</Text>}
 
       <View style={styles.footer}>
         <Text style={styles.footerText}>Don't have an account?</Text>

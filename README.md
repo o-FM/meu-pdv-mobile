@@ -51,3 +51,26 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Running web (expo-router) on Windows PowerShell
+
+If you see an error about `require.context` or `process.env.EXPO_ROUTER_APP_ROOT` when starting web, set the environment variable before starting Expo so the router can generate valid require.context calls.
+
+Recommended (after installing deps):
+
+```powershell
+npm run start:web:env
+```
+
+Quick PowerShell one-shot (no change to package.json):
+
+```powershell
+$env:EXPO_ROUTER_APP_ROOT = 'app'; npm run start --web
+```
+
+If PowerShell blocks running npm due to ExecutionPolicy, you can bypass for the command:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$env:EXPO_ROUTER_APP_ROOT='app'; npm run start --web"
+```
+
