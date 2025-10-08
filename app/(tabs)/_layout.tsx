@@ -1,8 +1,9 @@
+
 import { Tabs } from 'expo-router';
 import React from 'react';
-
 import { TabBarIcon } from '@/components/navigation/tab-bar-icon';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { HapticTab } from '@/components/haptic-tab';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -20,6 +21,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
           ),
+          tabBarButton: (props) => <HapticTab {...props} />,
         }}
       />
       <Tabs.Screen
@@ -29,6 +31,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
           ),
+          tabBarButton: (props) => <HapticTab {...props} />,
         }}
       />
     </Tabs>

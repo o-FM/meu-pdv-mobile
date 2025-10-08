@@ -8,12 +8,13 @@ import { Provider, useSelector } from 'react-redux';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { RootState, store } from '@/store/store';
 
-function RootLayoutNav() {
+function AuthRedirector() {
   const segments = useSegments();
   const router = useRouter();
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 
   useEffect(() => {
+    // run redirects after first render so the Root Layout (Slot) is already mounted
     const inAuthGroup = segments[0] === '(auth)';
 
     if (isAuthenticated && inAuthGroup) {
@@ -23,7 +24,7 @@ function RootLayoutNav() {
     }
   }, [isAuthenticated, segments, router]);
 
-  return <Slot />;
+  return null;
 }
 
 export default function RootLayout() {
@@ -32,7 +33,8 @@ export default function RootLayout() {
   return (
     <Provider store={store}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <RootLayoutNav />
+        <Slot />
+        <AuthRedirector />
         <StatusBar style="auto" />
       </ThemeProvider>
     </Provider>
