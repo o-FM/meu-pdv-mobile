@@ -23,11 +23,47 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="sales"
         options={{
-          title: 'Explore',
+          title: 'Vendas',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <TabBarIcon name={focused ? 'cart' : 'cart-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="products"
+        options={{
+          title: 'Produtos',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'list' : 'list-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="stock"
+        options={{
+          title: 'Estoque',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'archive' : 'archive-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="reports"
+        options={{
+          title: 'Relatórios',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'analytics' : 'analytics-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Perfil',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'person' : 'person-outline'} color={color} />
           ),
         }}
       />

@@ -1,12 +1,13 @@
+
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const Stock: React.FC = () => {
+const StockScreen = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Stock Screen</Text>
+      <Text>Estoque</Text>
     </View>
   );
 };
 
-export default Stock;
+export default StockScreen;

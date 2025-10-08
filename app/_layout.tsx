@@ -14,12 +14,19 @@ function RootLayoutNav() {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 
   useEffect(() => {
+    // Aguarda o roteador estar pronto antes de navegar.
+    if (segments.length === 0) {
+      return;
+    }
+
     const inAuthGroup = segments[0] === '(auth)';
 
-    if (isAuthenticated && inAuthGroup) {
-      router.replace('/(tabs)');
-    } else if (!isAuthenticated && !inAuthGroup) {
+    if (!isAuthenticated && !inAuthGroup) {
+      // Redireciona para a tela de login se o usuário não estiver autenticado e não estiver no grupo de autenticação.
       router.replace('/(auth)/signin');
+    } else if (isAuthenticated && inAuthGroup) {
+      // Redireciona para fora do grupo de autenticação se o usuário estiver autenticado.
+      router.replace('/(tabs)');
     }
   }, [isAuthenticated, segments, router]);
 

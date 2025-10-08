@@ -1,13 +1,12 @@
-
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const SalesScreen = () => {
+const ProductsScreen = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Vendas</Text>
+      <Text>Produtos</Text>
     </View>
   );
 };
 
-export default SalesScreen;
+export default ProductsScreen;

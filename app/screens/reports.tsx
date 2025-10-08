@@ -1,12 +1,13 @@
+
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const Reports: React.FC = () => {
+const ReportsScreen = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Reports Screen</Text>
+      <Text>Relatórios</Text>
     </View>
   );
 };
 
-export default Reports;
+export default ReportsScreen;
