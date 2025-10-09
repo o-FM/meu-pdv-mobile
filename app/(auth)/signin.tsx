@@ -1,63 +1,58 @@
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/ui/form-field';
-import { useLogin } from '@/hooks/useAuth';
 import { setAuthenticated } from '@/store/auth-slice';
 
 export default function SignIn() {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const router = useRouter();
 
-  const mutation = useLogin();
+  const [email, setEmail] = useState('qa@teste.com');
+  const [password, setPassword] = useState('123456');
+  const [loading, setLoading] = useState(false);
 
   const handleSignIn = async () => {
+    setLoading(true);
     try {
-      const res = await mutation.mutateAsync({ email, password });
-      // optionally get profile from res; for now mark as authenticated
-      dispatch(setAuthenticated({ email }));
-    } catch (e: any) {
-      // handled by UI below
+      // Mock simples para QA
+      await new Promise(resolve => setTimeout(resolve, 800)); // simula chamada
+      if (email === 'qa@teste.com' && password === '123456') {
+        dispatch(setAuthenticated({ email }));
+        router.replace("/(auth)/signin"); // redireciona para app principal
+      } else {
+        Alert.alert('Erro', 'Credenciais inválidas.');
+      }
+    } catch {
+      Alert.alert('Erro', 'Falha ao autenticar.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome Back!</Text>
-      <Text style={styles.subtitle}>Sign in to your account</Text>
+      <Text style={styles.title}>Bem-vindo de volta!</Text>
+      <Text style={styles.subtitle}>Entre com sua conta de teste</Text>
 
       <View style={styles.form}>
-        <FormField
-          label="Email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-        <FormField
-          label="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
+        <FormField label="Email" value={email} onChangeText={setEmail} keyboardType="email-address" />
+        <FormField label="Senha" value={password} onChangeText={setPassword} secureTextEntry />
       </View>
 
-      {mutation.status === 'pending' ? (
+      {loading ? (
         <ActivityIndicator />
       ) : (
-        <Button label="Sign In" onPress={handleSignIn} />
+        <Button label="Entrar" onPress={handleSignIn} />
       )}
 
-      {mutation.isError && <Text style={{ color: 'red', marginTop: 8 }}>{(mutation.error as any)?.message || 'Erro ao autenticar'}</Text>}
-
       <View style={styles.footer}>
-        <Text style={styles.footerText}>Don't have an account?</Text>
+        <Text style={styles.footerText}>Ainda não tem conta?</Text>
         <Link href="/(auth)/signup" asChild>
-          <Text style={styles.signupLink}> Sign Up</Text>
+          <Text style={styles.signupLink}> Cadastre-se</Text>
         </Link>
       </View>
     </View>
@@ -65,35 +60,11 @@ export default function SignIn() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 24,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    marginBottom: 32,
-    color: 'gray',
-  },
-  form: {
-    width: '100%',
-    marginBottom: 32,
-  },
-  footer: {
-    flexDirection: 'row',
-    marginTop: 32,
-  },
-  footerText: {
-    color: 'gray',
-  },
-  signupLink: {
-    color: 'blue',
-    fontWeight: 'bold',
-  },
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 24 },
+  title: { fontSize: 28, fontWeight: 'bold', marginBottom: 8 },
+  subtitle: { fontSize: 16, marginBottom: 32, color: 'gray' },
+  form: { width: '100%', marginBottom: 32 },
+  footer: { flexDirection: 'row', marginTop: 32 },
+  footerText: { color: 'gray' },
+  signupLink: { color: 'blue', fontWeight: 'bold' },
 });

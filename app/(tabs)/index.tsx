@@ -59,7 +59,7 @@ const DashboardScreen: React.FC = () => {
 // Reusable component for summary cards
 const SummaryCard: React.FC<{ title: string; value: string; icon: any }> = ({ title, value, icon }) => (
   <View style={styles.card}>
-    <Ionicons name={icon} size={32} color="#007AFF" />
+  <Ionicons name={icon} size={32} color="#42628C" />
     <Text style={styles.cardTitle}>{title}</Text>
     <Text style={styles.cardValue}>{value}</Text>
   </View>
@@ -78,7 +78,7 @@ const QuickAccessButton: React.FC<{ title: string; icon: any; onPress: () => voi
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f4f5f7',
+  backgroundColor: '#F2F2F2',
   },
   header: {
     fontSize: 32,
