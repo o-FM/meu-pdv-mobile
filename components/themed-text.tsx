@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
   link: {
     lineHeight: 30,
     fontSize: 16,
-  color: '#42628C',
+  color: '#90A681',
   },
 });

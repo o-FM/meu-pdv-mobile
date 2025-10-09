@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   heading: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
+    // gap not supported by RN StyleSheet; use margin on children instead
   },
   content: {
     marginTop: 6,

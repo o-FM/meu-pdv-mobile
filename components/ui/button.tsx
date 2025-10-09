@@ -16,7 +16,7 @@ export const Button: React.FC<ButtonProps> = ({ label, onPress }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'blue',
+    backgroundColor: '#90A681',
     padding: 16,
     borderRadius: 8,
     alignItems: 'center',
