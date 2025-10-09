@@ -1,4 +1,4 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Slot, useRouter, useSegments, useRootNavigationState } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
@@ -6,7 +6,7 @@ import 'react-native-reanimated';
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+// Dark mode support removed — no longer using useColorScheme
 import { RootState, store } from '@/store/store';
 import { useLoadTokens } from '@/hooks/useAuth';
 import { getAccessToken } from '@/lib/token';
@@ -60,13 +60,13 @@ function RootLayoutNav() {
 }
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  // always use DefaultTheme (light)
   const queryClient = new QueryClient();
 
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+  <ThemeProvider value={DefaultTheme}>
           <RootLayoutNav />
           <StatusBar style="auto" />
         </ThemeProvider>

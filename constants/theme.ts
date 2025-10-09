@@ -6,11 +6,11 @@
 import { Platform } from 'react-native';
 
 // New project palette
-const primary = '#0F1640'; // deep navy
-const secondary = '#42628C'; // blue-gray
-const muted = '#C7D1D9'; // light gray-blue
-const accent = '#8C3C1F'; // warm accent
-const neutral = '#F2F2F2'; // light background
+const primary = '#364027'; // deep navy
+const secondary = '#F2D6B3'; // blue-gray
+const muted = '#818C70'; // light gray-blue
+const accent = '#010D00'; // warm accent
+const neutral = '#B7C7AC'; // light background
 
 export const Colors = {
   light: {
